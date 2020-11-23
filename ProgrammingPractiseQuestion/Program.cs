@@ -20,9 +20,35 @@ namespace ProgrammingPractiseQuestion
             playlist.Add(s4);
             playlist.Add(s5);
 
-            foreach(Song song in playlist)
+            Display(playlist);
+
+            playlist.Sort();
+            Display(playlist);
+
+            Shuffle(playlist);
+            Display(playlist);
+        }
+        private static void Display(List<Song> playlist)
+        {
+            Console.WriteLine("\n{0, -25}{1, -20}{2, -10}{3, -10}", "Song", "Artist", "Duration", "Genre");
+
+            foreach (Song song in playlist)
             {
-                Console.WriteLine(song);
+                Console.WriteLine($"{song.Title, -25}{song.Artist, -20}{song.Duration, -10}{song.MusicGenre, -10}");
+            }
+        }
+        private static void Shuffle(List<Song> playlist)
+        {
+            Random rng = new Random();
+            int numberOfSongs = playlist.Count;
+
+            while(numberOfSongs > 1)
+            {
+                numberOfSongs--;
+                int randomNumber = rng.Next(numberOfSongs + 1);
+                Song song = playlist[randomNumber];
+                playlist[randomNumber] = playlist[numberOfSongs];
+                playlist[numberOfSongs] = song;
             }
         }
     }
